@@ -1,0 +1,19 @@
+{
+  "name": "sme-sync-ical-server",
+  "version": "1.0.0",
+  "description": "Server to listen to SyncList",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.13.3",
+    "got": "^9.2.2",
+    "twilio": "^3.0.0-rc.13",
+    "twilio-sync": "^0.7.5",
+    "underscore": "^1.8.3"
+  }
+}
