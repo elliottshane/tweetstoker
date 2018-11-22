@@ -1,4 +1,4 @@
-This is a quick app that twwts the data from your stoker.  
+This is a quick app that tweets the data from your stoker.  
 
 1) Clone / install 
 
