@@ -1,9 +1,9 @@
 'use strict';
 const got = require('got');
 const url = 'http://192.168.1.21/stoker.json';
-var Twitter = require('twitter');
-var config = require('./config.js');
-var T = new Twitter(config);
+const Twitter = require('twitter');
+const config = require('./config.js');
+const T = new Twitter(config);
 
 setInterval(function () {
   got(url)
