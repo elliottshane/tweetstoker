@@ -15,9 +15,7 @@ setInterval(function () {
         .catch(err=>console.log(err));
       });
     })
-    .catch(function (err) {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 }, 600 * 1000);
 
 
