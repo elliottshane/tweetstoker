@@ -1,11 +1,7 @@
+// config.js
 module.exports = {
-  // Your primary Twilio Account SID
-  accountSid: '',
-
-  // API Key/Secret Pair - generate a pair in the console
-  apiKey: '',
-  apiSecret: '',
-  
-  // Your Sync service instance SID
-  serviceSid: ''
-};
+  consumer_key: '',
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: ''
+}
