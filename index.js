@@ -1,56 +1,28 @@
 'use strict';
-const AccessToken = require('twilio').jwt.AccessToken;
 const got = require('got');
-const SyncGrant = AccessToken.SyncGrant;
-const config = require('./config.js');
-var SyncClient = require('twilio-sync');
-var syncClient = new SyncClient(getToken());
-const url = 'http://localhost:4567/status';
+const url = 'http://192.168.1.21/stoker.json';
+var Twitter = require('twitter');
+var config = require('./config.js');
+var T = new Twitter(config);
 
-//create a token for Sync
-function getToken(){
-  let identity = 'smeListMonitor';
-  let syncGrant = new SyncGrant({
-    serviceSid: config.serviceSid,
-  });
-  let token = new AccessToken(
-    config.accountSid, 
-    config.apiKey, 
-    config.apiSecret
-  );
-  token.addGrant(syncGrant);
-  token.identity = identity;
-  var ret = token.toJwt();
-  return ret;
-};
-
-
-//syncClient.list('SyncApptList')
-syncClient.list('wscBibData')
-  .then(function(list) {
-    console.log('Successfully opened a List. SID: ' + list.sid);
-    list.on('itemUpdated', function(data){
-      console.log(data.item.data.value);
-
+setInterval(function () {
+  got(url)
+    .then(function (data) {
+      let logData = JSON.parse(data.body);
+      logData.stoker.sensors.forEach(element => {
+        console.log(element.name+':'+element.tc)
+        T.post('statuses/update', { status: 'My Smoker Update ' + element.name + ':' + element.tc})
+        .catch(err=>console.log(err));
+      });
+    })
+    .catch(function (err) {
+      console.log(err);
     });
-    list.on('itemAdded', function(item) {
-      let data = item.item.data.value;
-      console.log(data);
-       /* got(url, {
-            json: true,
-            body: data,
-            })
-            .then(function (data) {
-            console.log(data.body)
-            })
-            .catch(function(err){
-              console.log(err);
-            });*/
-    });
-  })
-  .catch(function(error) {
-    console.log('error', error);
-  });
+}, 600 * 1000);
+
+
+
+
 
 
 
